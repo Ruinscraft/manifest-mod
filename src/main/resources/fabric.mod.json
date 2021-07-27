@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "manifest",
+  "version": "${version}",
+
+  "name": "Manifest Mod",
+  "description": "Reports mod information to the server",
+  "authors": [
+    "royalkingkb"
+  ],
+  "contact": {
+    "homepage": "https://ruinscraft.com/",
+    "sources": "https://github.com/Ruinscraft/ruinscraft-manifest-mod"
+  },
+
+  "license": "CC0-1.0",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.ruinscraft.manifest.ManifestMod"
+    ]
+  },
+  "mixins": [
+    "manifest.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.7.4",
+    "fabric": "*",
+    "minecraft": "1.16.x"
+  }
+}
