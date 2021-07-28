@@ -16,9 +16,9 @@ public final class NetworkUtil {
     public static void sendModsManifestPacket(Map<String, String> mods) {
         ByteArrayDataOutput out = ByteStreams.newDataOutput();
         out.writeInt(mods.size());
-        for (String modName : mods.keySet()) {
-            out.writeUTF(modName); // write name
-            out.writeUTF(mods.get(modName)); // write version
+        for (String mod : mods.keySet()) {
+            out.writeUTF(mod); // write file name
+            out.writeUTF(mods.get(mod)); // write hash
         }
         PacketByteBuf byteBuf = new PacketByteBuf(Unpooled.buffer());
         byteBuf.writeBytes(out.toByteArray());

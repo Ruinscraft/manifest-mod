@@ -1,9 +1,10 @@
 package com.ruinscraft.manifest;
 
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.loader.api.FabricLoader;
-import net.fabricmc.loader.api.ModContainer;
 
+import java.io.File;
+import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,8 +28,26 @@ public class ManifestMod implements ModInitializer {
 
         mods = new HashMap<>();
 
-        for (ModContainer modContainer : FabricLoader.getInstance().getAllMods()) {
-            mods.put(modContainer.getMetadata().getName(), modContainer.getMetadata().getVersion().getFriendlyString());
+        findSteveCinemaMods();
+
+        for (String mod : mods.keySet()) {
+            System.out.println(mod + " " + mods.get(mod));
+        }
+    }
+
+    private void findSteveCinemaMods() {
+        File steveCinemaModsDir = new File("mods/stevecinema.com");
+
+        if (steveCinemaModsDir.exists()) {
+            for (String fileName : steveCinemaModsDir.list()) {
+                File file = new File(steveCinemaModsDir, fileName);
+                try {
+                    String SHA1 = HashUtil.SHA1(file);
+                    mods.put(fileName, SHA1);
+                } catch (IOException | NoSuchAlgorithmException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
